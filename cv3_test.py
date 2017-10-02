@@ -28,7 +28,6 @@ def my_filtered_map(fun, lst, **kw):
 		return lst
 
 def bank_account(*filenames):
-	arr = []
 	acc_dict = {}
 	try:
 		for file in filenames:
@@ -48,11 +47,14 @@ def bank_account(*filenames):
 					acc_dict[acc_no] -= int(amount)
 				elif action == 'D':
 					acc_dict[acc_no] += int(amount)
-				else action == 'I':
-					acc_dict[acc_no] /= int(amount)
+				elif action == 'I':
+					acc_dict[acc_no] /= float(amount)
+		return acc_dict
 	except IOError as e:
-		print ("Chybicka: " + e)
+		print ("Chybicka: ", e)
+	finally:
+		mf.close()
 
 #add_line_numbers("text.txt")
 #print(my_filtered_map(lambda x: x*2, [-4.4, -2, 4], max = 0))
-bank_account("cv2_files/bank_01.txt", "cv2_files/bank_02.txt")
+print(bank_account("cv3_files/bank_01.txt", "cv3_files/bank_02.txt"))
